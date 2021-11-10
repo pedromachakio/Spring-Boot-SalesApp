@@ -21,23 +21,23 @@ public class SalesApp {
             clientsDAO.save(new Client("BeThereHealth"));
 
             System.out.println("--- Displaying List of Clients ---");
-            List<Client> listOfClients = clientsDAO.displayClientsList();
+            List<Client> listOfClients = clientsDAO.findAll();
             listOfClients.forEach(System.out::println);
 
             System.out.println("--- Updating Name Of Clients ---");
             listOfClients.forEach(client -> {
                 client.setName(client.getName() + " ganda atualização");
-                clientsDAO.update(client);
+                clientsDAO.save(client); // save do jpa repository tanto guarda como dá update, por isso é usado para ambos
             });
 
 
             System.out.println("--- Getting Client by Specific Name, Including Partial Match ---");
-            clientsDAO.getClientByName("Heal").forEach(System.out::println);
+            clientsDAO.findByNameLike("Heal").forEach(System.out::println);
 
 
-            clientsDAO.displayClientsList().forEach(clientsDAO::delete);
+            clientsDAO.findAll().forEach(clientsDAO::delete);
 
-            listOfClients = clientsDAO.displayClientsList(); // buscar novamente a lista de clientes para atualizar aqui com o que está no h2
+            listOfClients = clientsDAO.findAll(); // buscar novamente a lista de clientes para atualizar aqui com o que está no h2
              System.out.println("--- Displaying List of Clients After Delete ---");
             if (listOfClients.isEmpty()) {
                 System.out.println("No clients left.");
