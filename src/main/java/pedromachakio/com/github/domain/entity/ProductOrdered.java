@@ -1,10 +1,21 @@
 package pedromachakio.com.github.domain.entity;
 
+import javax.persistence.*;
+
+@Entity
 public class ProductOrdered {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @ManyToOne // muitos itens pedidos para um produto??
+    @JoinColumn(name = "PRODUCT_ID")
     private Product product;
-    private OrderDetails orderDetails;
+
+    @ManyToOne // muitos itens pedidos num pedido
+    @JoinColumn(name = "ORDER_DETAILS_ID")
+    private OrderDetails orderDetails_ProductOrdered;
     private Integer quantity;
 
     public Integer getId() {
@@ -23,12 +34,12 @@ public class ProductOrdered {
         this.product = product;
     }
 
-    public OrderDetails getOrderDetails() {
-        return orderDetails;
+    public OrderDetails getOrderDetails_ProductOrdered() {
+        return orderDetails_ProductOrdered;
     }
 
-    public void setOrderDetails(OrderDetails orderDetails) {
-        this.orderDetails = orderDetails;
+    public void setOrderDetails_ProductOrdered(OrderDetails orderDetails_ProductOrdered) {
+        this.orderDetails_ProductOrdered = orderDetails_ProductOrdered;
     }
 
     public Integer getQuantity() {
