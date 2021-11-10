@@ -1,13 +1,26 @@
 package pedromachakio.com.github.domain.entity;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "ORDER_DETAILS")
 public class OrderDetails {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private Client client;
+
+
+    @ManyToOne
+    @JoinColumn(name = "CLIENT_ID")
+    private Client client_OrderDetails;
+
+    @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
+
+    @Column(name = "TOTAL_PRICE", length = 20, precision = 2)
     private BigDecimal totalPrice;
 
     public Integer getId() {
@@ -18,12 +31,12 @@ public class OrderDetails {
         this.id = id;
     }
 
-    public Client getClient() {
-        return client;
+    public Client getClient_OrderDetails() {
+        return client_OrderDetails;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClient_OrderDetails(Client client_OrderDetails) {
+        this.client_OrderDetails = client_OrderDetails;
     }
 
     public LocalDate getOrderDate() {
