@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ClientsDAO extends JpaRepository<Client, Integer> {
 
+    List<Client> findByNameLike(String name); // has to follow convenção query methods e fica ready behind the scenes
 
-    List<Client> findByNameLike(String name);
+    boolean existsByName (String name);
 }

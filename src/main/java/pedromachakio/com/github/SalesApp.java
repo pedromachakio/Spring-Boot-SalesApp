@@ -20,11 +20,14 @@ public class SalesApp {
             clientsDAO.save(new Client("Pedriem"));
             clientsDAO.save(new Client("BeThereHealth"));
 
-            System.out.println("--- Displaying List of Clients ---");
-            List<Client> listOfClients = clientsDAO.findAll();
-            listOfClients.forEach(System.out::println);
+            //stem.out.println("--- Displaying List of Clients ---");
+            //List<Client> listOfClients = clientsDAO.findAll();
+            //listOfClients.forEach(System.out::println);
+            boolean clientExists = clientsDAO.existsByName("Pedriem");
+            System.out.println("Is there a client with the name Pedriem? " + clientExists);
 
-            System.out.println("--- Updating Name Of Clients ---");
+
+            /*System.out.println("--- Updating Name Of Clients ---");
             listOfClients.forEach(client -> {
                 client.setName(client.getName() + " ganda atualização");
                 clientsDAO.save(client); // save do jpa repository tanto guarda como dá update, por isso é usado para ambos
@@ -43,7 +46,7 @@ public class SalesApp {
                 System.out.println("No clients left.");
             } else {
                 listOfClients.forEach(System.out::println);
-            }
+            }*/
         };
     }
 
