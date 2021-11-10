@@ -11,7 +11,7 @@ import pedromachakio.com.github.domain.repository.ClientsDAO;
 import java.util.List;
 
 @SpringBootApplication
-public class SalesApp {
+public class SalesApp{
 
     @Bean
     public CommandLineRunner init(@Autowired ClientsDAO clientsDAO) {
