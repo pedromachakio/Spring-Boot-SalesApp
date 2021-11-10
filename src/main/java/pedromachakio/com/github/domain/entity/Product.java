@@ -1,11 +1,17 @@
 package pedromachakio.com.github.domain.entity;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String description;
+
+    @Column(name = "UNIT_PRICE")
     private BigDecimal unitPrice;
 
     public Integer getId() {

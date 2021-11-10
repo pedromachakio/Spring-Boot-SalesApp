@@ -10,7 +10,6 @@ public class Client {
     @Id // defines primary key
     @GeneratedValue(strategy = GenerationType.AUTO)
     //https://stackoverflow.com/questions/20603638/what-is-the-use-of-annotations-id-and-generatedvaluestrategy-generationtype
-
     @Column(name = "ID")
     private Integer id;
 
