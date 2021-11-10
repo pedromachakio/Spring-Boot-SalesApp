@@ -1,9 +1,23 @@
 package pedromachakio.com.github.domain.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "CLIENT")
+// anotação opcional, desde que o nome da classe corresponda ao nome na tabela, which it should in the first place
 public class Client {
 
+    @Id // defines primary key
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //https://stackoverflow.com/questions/20603638/what-is-the-use-of-annotations-id-and-generatedvaluestrategy-generationtype
+
+    @Column(name = "ID")
     private Integer id;
+
+    @Column(name = "NAME", length = 100)
+    // anotação opcional, desde que o nome da classe corresponda ao nome na tabela, which it should in the first place
     private String name;
+
 
     public Client() {
     }
