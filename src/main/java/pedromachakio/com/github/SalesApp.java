@@ -24,7 +24,7 @@ public class SalesApp {
             List<Client> listOfClients = clientsDAO.displayClientsList();
             listOfClients.forEach(System.out::println);
 
-            System.out.println("--- Updating Name Of Clients ---");
+            /*System.out.println("--- Updating Name Of Clients ---");
             listOfClients.forEach(client -> {
                 client.setName(client.getName() + " ganda atualização");
                 clientsDAO.update(client);
@@ -42,7 +42,7 @@ public class SalesApp {
                 System.out.println("No clients left.");
             } else {
                 listOfClients.forEach(System.out::println);
-            }
+            }*/
         };
     }
 

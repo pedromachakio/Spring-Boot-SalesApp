@@ -4,14 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pedromachakio.com.github.domain.entity.Client;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
 public class ClientsDAO {
 
-    private static final String SQL_INSERT = "INSERT INTO CLIENT (NAME) VALUES (?) ";
+    //private static final String SQL_INSERT = "INSERT INTO CLIENT (NAME) VALUES (?) ";
     private static final String SQL_SELECT_ALL = "SELECT * FROM CLIENT ";
     private static final String SQL_SELECT_SPECIFIC_CLIENT = "SELECT * FROM CLIENT WHERE NAME LIKE ? ";
     private static final String SQL_UPDATE = "UPDATE CLIENT SET NAME = ? WHERE ID = ? ";
@@ -21,9 +23,13 @@ public class ClientsDAO {
     @Autowired // para o Spring injetar uma instância de jdbcTemplate para poder usá-lo
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    EntityManager entityManager; // responsible for all operations with the mapped entities
 
+    @Transactional // required with entityManager
     public Client save(Client client) {
-        jdbcTemplate.update(SQL_INSERT, client.getName()); // recebe scripts de sql nativo // ele fez assim new Object[]{client.getName()}
+        //jdbcTemplate.update(SQL_INSERT, client.getName()); // recebe scripts de sql nativo // ele fez assim new Object[]{client.getName()}
+        entityManager.persist(client);
         return client;
     }
 
