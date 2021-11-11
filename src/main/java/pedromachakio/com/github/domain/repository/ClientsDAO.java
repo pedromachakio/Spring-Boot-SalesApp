@@ -20,6 +20,13 @@ public interface ClientsDAO extends JpaRepository<Client, Integer> {
 
     boolean existsByName(String name);
 
-    @Modifying // os métodos que não são apenas de consulta e que modificam as tabelas têm de ser anotados com esta
+    @Modifying
+        // os métodos que não são apenas de consulta e que modificam as tabelas têm de ser anotados com esta
     void deleteByName(String name);
+
+    @Query(" select c from Client c left join fetch c.orderDetails where c.id = :id ")
+        // left join traz clientes quer tenham pedidos quer não (se fosse só fetch so trazia os que têm pedidos)
+    Client findClientFetchOrders(@Param("id") Integer id); // já que estou a usar lazy no Client, é assim que vou buscar o Set com os pedidos de cada cliente (por ID)
+
+
 }

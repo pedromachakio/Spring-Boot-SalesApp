@@ -6,22 +6,35 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pedromachakio.com.github.domain.entity.Client;
+import pedromachakio.com.github.domain.entity.OrderDetails;
 import pedromachakio.com.github.domain.repository.ClientsDAO;
+import pedromachakio.com.github.domain.repository.OrdersDetailsDAO;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
-public class SalesApp{
+public class SalesApp {
 
     @Bean
-    public CommandLineRunner init(@Autowired ClientsDAO clientsDAO) {
+    public CommandLineRunner init(@Autowired ClientsDAO clientsDAO, @Autowired OrdersDetailsDAO ordersDetailsDAO) {
         return args -> {
             System.out.println("--- Saving Clients ---");
-            clientsDAO.save(new Client("Pedriem"));
-            clientsDAO.save(new Client("BeThereHealth"));
 
-           List<Client> clientsWithMatchingName = clientsDAO.findClientWithPartiallyMatchingName("Heal");
-           clientsWithMatchingName.forEach(System.out::println);
+            Client client_BeThereHealth = new Client("BeThereHealth");
+            clientsDAO.save(client_BeThereHealth);
+
+            OrderDetails order = new OrderDetails();
+            order.setClient_OrderDetails(client_BeThereHealth);
+            order.setOrderDate(LocalDate.now());
+            order.setTotalPrice(BigDecimal.valueOf(100));
+
+            ordersDetailsDAO.save(order);
+
+            Client client = clientsDAO.findClientFetchOrders(client_BeThereHealth.getId());
+            System.out.println(client);
+            System.out.println(client.getOrderDetails());
         };
     }
 

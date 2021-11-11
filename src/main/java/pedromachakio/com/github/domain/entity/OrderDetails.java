@@ -21,7 +21,7 @@ public class OrderDetails {
     @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
 
-    @Column(name = "TOTAL_PRICE", length = 20, precision = 2)
+    @Column(name = "TOTAL_PRICE", precision = 20, scale = 2)
     private BigDecimal totalPrice;
 
     @OneToMany(mappedBy = "orderDetails_ProductOrdered")
@@ -65,5 +65,14 @@ public class OrderDetails {
 
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetails{" +
+                "id=" + id +
+                ", orderDate=" + orderDate +
+                ", totalPrice=" + totalPrice +
+                '}';
     }
 }
