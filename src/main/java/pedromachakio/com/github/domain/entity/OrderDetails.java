@@ -16,7 +16,7 @@ public class OrderDetails {
 
     @ManyToOne
     @JoinColumn(name = "CLIENT_ID")
-    private Client client_OrderDetails;
+    private Client client;
 
     @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
@@ -43,12 +43,12 @@ public class OrderDetails {
         this.id = id;
     }
 
-    public Client getClient_OrderDetails() {
-        return client_OrderDetails;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClient_OrderDetails(Client client_OrderDetails) {
-        this.client_OrderDetails = client_OrderDetails;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public LocalDate getOrderDate() {

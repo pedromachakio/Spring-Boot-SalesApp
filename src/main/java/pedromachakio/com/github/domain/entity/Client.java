@@ -21,7 +21,7 @@ public class Client {
     // para poder obter todos os pedidos de um cliente, faz-se o mapeamento ao contrário também (dos pedidos para o cliente)
     // utiliza-se um Set porque cada pedido é único
     // um cliente para muitos pedidos
-    @OneToMany(mappedBy = "client_OrderDetails", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     // no sql quem tem a chave é o pedido e não o cliente, no entanto se eu quiser ir buscar pedidos através dos clientes
     // é assim que se faz o mapeamento; tem que ser o nome com que foi instanciado no que tem a key, aka no OrderDetails
     // Se o Fetch Type for EAGER sempre que for buscar o Client, mesmo que não sejam precisos os orderDetails, eles vão vir sempre.

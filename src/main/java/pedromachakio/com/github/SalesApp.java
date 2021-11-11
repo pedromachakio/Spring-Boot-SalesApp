@@ -12,7 +12,6 @@ import pedromachakio.com.github.domain.repository.OrdersDetailsDAO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @SpringBootApplication
 public class SalesApp {
@@ -26,15 +25,17 @@ public class SalesApp {
             clientsDAO.save(client_BeThereHealth);
 
             OrderDetails order = new OrderDetails();
-            order.setClient_OrderDetails(client_BeThereHealth);
+            order.setClient(client_BeThereHealth);
             order.setOrderDate(LocalDate.now());
             order.setTotalPrice(BigDecimal.valueOf(100));
 
             ordersDetailsDAO.save(order);
 
-            Client client = clientsDAO.findClientFetchOrders(client_BeThereHealth.getId());
+            /*Client client = clientsDAO.findClientFetchOrders(client_BeThereHealth.getId());
             System.out.println(client);
-            System.out.println(client.getOrderDetails());
+            System.out.println(client.getOrderDetails());*/
+
+           ordersDetailsDAO.findByClient(client_BeThereHealth).forEach(System.out::println); // find os pedidos deste cliente
         };
     }
 
