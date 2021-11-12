@@ -9,14 +9,15 @@ public class ProductOrdered {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne // muitos itens pedidos para um produto??
+    @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
-    @ManyToOne // muitos itens pedidos num pedido
+    @ManyToOne
     @JoinColumn(name = "ORDER_DETAILS_ID")
     private OrderDetails orderDetails_ProductOrdered;
     private Integer quantity;
+
 
     public Integer getId() {
         return id;
