@@ -17,6 +17,9 @@ public class Client {
     @Column(name = "NAME", length = 100)
     private String name;
 
+    @Column(name = "nif", length = 9)
+    private String taxPayerId;
+
     @JsonIgnore // ignore in json response
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private Set<OrderDetails> orderDetails;
@@ -40,6 +43,14 @@ public class Client {
     public Client(Integer id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public String getTaxPayerId() {
+        return taxPayerId;
+    }
+
+    public void setTaxPayerId(String taxPayerId) {
+        this.taxPayerId = taxPayerId;
     }
 
     public Integer getId() {

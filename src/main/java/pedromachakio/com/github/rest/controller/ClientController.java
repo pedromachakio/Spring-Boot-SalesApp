@@ -1,11 +1,14 @@
 package pedromachakio.com.github.rest.controller;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pedromachakio.com.github.domain.entity.Client;
 import pedromachakio.com.github.domain.repository.ClientsDAO;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -63,5 +66,19 @@ public class ClientController {
                     return ResponseEntity.noContent().build();
                 }).orElseGet(() -> ResponseEntity.notFound().build()
                 );
+    }
+
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity findClient(Client filterClient) {
+        ExampleMatcher exampleMatcher = ExampleMatcher
+                .matching()
+                .withIgnoreCase() // ignores upper and lower case, matches both
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING); // tem que conter a sequência de caracteres anywhere na palavra
+
+        Example<Client> example = Example.of(filterClient, exampleMatcher); // retrieves the properties that are not null and that match
+
+        List<Client> clientList = clientsDAO.findAll(example);
+        return ResponseEntity.ok(clientList);
     }
 }
