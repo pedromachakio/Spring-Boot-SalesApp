@@ -49,4 +49,19 @@ public class ClientController {
             return ResponseEntity.notFound().build(); //404
         }
     }
+
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity updateClient(@PathVariable Integer id, @RequestBody Client providedClient) {
+
+        return clientsDAO
+                .findById(id)
+                .map(alreadyExistingClient -> { // if is present does this, otherwise return an empty Optional (check this map method)
+                    providedClient.setId(alreadyExistingClient.getId());
+                    //client.setName(existingClient.getName()); só é preciso fazer para o ID o resto das props atualizados já estão no RequestBody e são feitas tmb
+                    clientsDAO.save(providedClient);
+                    return ResponseEntity.noContent().build();
+                }).orElseGet(() -> ResponseEntity.notFound().build()
+                );
+    }
 }
