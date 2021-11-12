@@ -36,4 +36,17 @@ public class ClientController {
         Client savedClient = clientsDAO.save(client);
         return ResponseEntity.ok(savedClient);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Client> deleteClient(@PathVariable Integer id) {
+        Optional<Client> clientOptional = clientsDAO.findById(id);
+
+        if (clientOptional.isPresent()) {
+            clientsDAO.delete(clientOptional.get());
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build(); //404
+        }
+    }
 }
