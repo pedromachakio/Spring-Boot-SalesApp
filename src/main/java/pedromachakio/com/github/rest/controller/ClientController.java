@@ -3,14 +3,12 @@ package pedromachakio.com.github.rest.controller;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pedromachakio.com.github.domain.entity.Client;
 import pedromachakio.com.github.domain.repository.ClientsDAO;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/clients")
@@ -31,7 +29,7 @@ public class ClientController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED) // Convenção é retornar estado 201 em vez de 200 quando é criado com sucesso
+    @ResponseStatus(HttpStatus.CREATED)
     public Client saveClient(@RequestBody Client client) {
         return clientsDAO.save(client);
     }
