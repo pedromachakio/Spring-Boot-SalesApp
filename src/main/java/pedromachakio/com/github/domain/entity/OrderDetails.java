@@ -27,6 +27,7 @@ public class OrderDetails {
     @OneToMany(mappedBy = "orderDetails_ProductOrdered")
     private List<ProductOrdered> items;
 
+
     public List<ProductOrdered> getItems() {
         return items;
     }

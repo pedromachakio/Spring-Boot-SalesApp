@@ -16,6 +16,7 @@ public class ProductOrdered {
     @ManyToOne
     @JoinColumn(name = "ORDER_DETAILS_ID")
     private OrderDetails orderDetails_ProductOrdered;
+
     private Integer quantity;
 
 
