@@ -1,7 +1,14 @@
 package pedromachakio.com.github.domain.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class ProductOrdered {
 
@@ -19,36 +26,4 @@ public class ProductOrdered {
 
     private Integer quantity;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public OrderDetails getOrderDetails_ProductOrdered() {
-        return orderDetails_ProductOrdered;
-    }
-
-    public void setOrderDetails_ProductOrdered(OrderDetails orderDetails_ProductOrdered) {
-        this.orderDetails_ProductOrdered = orderDetails_ProductOrdered;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
 }

@@ -1,10 +1,16 @@
 package pedromachakio.com.github.domain.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "ORDER_DETAILS")
 public class OrderDetails {
@@ -28,52 +34,4 @@ public class OrderDetails {
     private List<ProductOrdered> items;
 
 
-    public List<ProductOrdered> getItems() {
-        return items;
-    }
-
-    public void setItems(List<ProductOrdered> items) {
-        this.items = items;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public LocalDate getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(LocalDate orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    @Override
-    public String toString() {
-        return "OrderDetails{" +
-                "id=" + id +
-                ", orderDate=" + orderDate +
-                ", totalPrice=" + totalPrice +
-                '}';
-    }
 }
