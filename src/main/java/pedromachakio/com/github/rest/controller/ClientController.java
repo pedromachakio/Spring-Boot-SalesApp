@@ -23,10 +23,17 @@ public class ClientController {
     public ResponseEntity<Client> getClientById(@PathVariable Integer id) { // para dizer que esta var vai estar no actual link/path
         Optional<Client> clientOptional = clientsDAO.findById(id); // optional porque pode ou não existir um cliente com este id
 
-        if(clientOptional.isPresent()) {
+        if (clientOptional.isPresent()) {
             return ResponseEntity.ok(clientOptional.get()); // para responder com 200 e com o respetivo cliente desse id
         } else {
             return ResponseEntity.notFound().build(); //404
         }
+    }
+
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<Client> saveClient(@RequestBody Client client) { // request porque é o utilizador que fornece
+        Client savedClient = clientsDAO.save(client);
+        return ResponseEntity.ok(savedClient);
     }
 }

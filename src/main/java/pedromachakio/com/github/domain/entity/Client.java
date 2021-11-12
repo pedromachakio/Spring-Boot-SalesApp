@@ -1,5 +1,7 @@
 package pedromachakio.com.github.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,6 +17,7 @@ public class Client {
     @Column(name = "NAME", length = 100)
     private String name;
 
+    @JsonIgnore // ignore in json response
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private Set<OrderDetails> orderDetails;
 
