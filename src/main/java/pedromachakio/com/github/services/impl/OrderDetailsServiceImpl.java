@@ -19,6 +19,7 @@ import pedromachakio.com.github.services.OrderDetailsService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -80,5 +81,10 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
                     return productOrdered;
                 }).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<OrderDetails> getCompleteRequest(Integer id) {
+        return ordersDetailsDAO.findFetchId(id);
     }
 }

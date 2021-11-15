@@ -26,4 +26,6 @@ public class ProductOrdered {
 
     private Integer quantity;
 
+
+
 }
