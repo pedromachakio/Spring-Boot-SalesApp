@@ -1,7 +1,10 @@
 package pedromachakio.com.github.rest.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.aspectj.weaver.ast.Or;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import pedromachakio.com.github.domain.entity.OrderDetails;
+import pedromachakio.com.github.rest.controller.dto.OrderDetailsDTO;
 import pedromachakio.com.github.services.OrderDetailsService;
 
 @RestController
@@ -12,6 +15,13 @@ public class OrderDetailsController {
 
     public OrderDetailsController(OrderDetailsService orderDetailsService) {
         this.orderDetailsService = orderDetailsService;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Integer saveOrder(@RequestBody OrderDetailsDTO orderDetailsDTO) {
+        OrderDetails orderDetails = orderDetailsService.saveOrder(orderDetailsDTO);
+        return orderDetails.getId();
     }
 
 }
