@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pedromachakio.com.github.exception.BusinessLogicException;
+import pedromachakio.com.github.exception.RequestNotFoundException;
 import pedromachakio.com.github.rest.ApiErrors;
 
 @RestControllerAdvice
@@ -15,5 +16,11 @@ public class ApplicationControllerAdvice {
     public ApiErrors handleBusinessLogicException(BusinessLogicException businessLogicException) {
         String errorMessage = businessLogicException.getMessage();
         return new ApiErrors(errorMessage);
+    }
+
+    @ExceptionHandler(RequestNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrors handleRequestNotFoundException(RequestNotFoundException requestNotFoundException) {
+        return new ApiErrors(requestNotFoundException.getMessage());
     }
 }

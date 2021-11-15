@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pedromachakio.com.github.domain.entity.OrderDetails;
 import pedromachakio.com.github.domain.entity.ProductOrdered;
+import pedromachakio.com.github.domain.enums.OrderStatus;
 import pedromachakio.com.github.rest.dto.OrderDetailsDTO;
 import pedromachakio.com.github.rest.dto.OrderInfoDTO;
 import pedromachakio.com.github.rest.dto.OrderedProductInfoDto;
+import pedromachakio.com.github.rest.dto.StatusUpdateDTO;
 import pedromachakio.com.github.services.OrderDetailsService;
 
 import java.time.format.DateTimeFormatter;
@@ -40,6 +42,14 @@ public class OrderDetailsController {
                 .map(order -> convertOrder(order))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find client with given id: " + id));
 
+    }
+
+    @PatchMapping("{id}")
+    // se fosse o Put tinha que se passar a info TODA do pedido, nao se pode atualizar apenas um campo otherwise dá erro
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateStatus(@PathVariable Integer id, @RequestBody StatusUpdateDTO statusUpdateDTO) {
+        String newStatus = statusUpdateDTO.getNewStatus();
+        orderDetailsService.statusUpdate(id, OrderStatus.valueOf(newStatus));
     }
 
     private OrderInfoDTO convertOrder(OrderDetails order) {

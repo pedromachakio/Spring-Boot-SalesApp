@@ -13,6 +13,7 @@ import pedromachakio.com.github.domain.repository.OrdersDetailsDAO;
 import pedromachakio.com.github.domain.repository.ProductsDAO;
 import pedromachakio.com.github.domain.repository.ProductsOrderedDAO;
 import pedromachakio.com.github.exception.BusinessLogicException;
+import pedromachakio.com.github.exception.RequestNotFoundException;
 import pedromachakio.com.github.rest.dto.OrderDetailsDTO;
 import pedromachakio.com.github.rest.dto.ProductsOrderedDTO;
 import pedromachakio.com.github.services.OrderDetailsService;
@@ -88,5 +89,17 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     @Override
     public Optional<OrderDetails> getCompleteRequest(Integer id) {
         return ordersDetailsDAO.findFetchId(id);
+    }
+
+    @Override
+    @Transactional
+    public void statusUpdate(Integer id, OrderStatus orderStatus) {
+        ordersDetailsDAO
+                .findById(id)
+                .map(order -> {
+                    order.setStatus(orderStatus);
+                    return ordersDetailsDAO.save(order);
+                })
+                .orElseThrow(RequestNotFoundException::new);
     }
 }
