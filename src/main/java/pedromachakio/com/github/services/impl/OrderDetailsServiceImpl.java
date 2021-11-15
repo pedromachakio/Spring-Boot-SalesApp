@@ -12,8 +12,8 @@ import pedromachakio.com.github.domain.repository.OrdersDetailsDAO;
 import pedromachakio.com.github.domain.repository.ProductsDAO;
 import pedromachakio.com.github.domain.repository.ProductsOrderedDAO;
 import pedromachakio.com.github.exception.BusinessLogicException;
-import pedromachakio.com.github.rest.controller.dto.OrderDetailsDTO;
-import pedromachakio.com.github.rest.controller.dto.ProductsOrderedDTO;
+import pedromachakio.com.github.rest.dto.OrderDetailsDTO;
+import pedromachakio.com.github.rest.dto.ProductsOrderedDTO;
 import pedromachakio.com.github.services.OrderDetailsService;
 
 import java.math.BigDecimal;

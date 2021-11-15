@@ -3,7 +3,7 @@ package pedromachakio.com.github.rest.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pedromachakio.com.github.domain.entity.OrderDetails;
-import pedromachakio.com.github.rest.controller.dto.OrderDetailsDTO;
+import pedromachakio.com.github.rest.dto.OrderDetailsDTO;
 import pedromachakio.com.github.services.OrderDetailsService;
 
 @RestController

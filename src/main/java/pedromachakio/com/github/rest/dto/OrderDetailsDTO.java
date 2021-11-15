@@ -1,4 +1,4 @@
-package pedromachakio.com.github.rest.controller.dto;
+package pedromachakio.com.github.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
