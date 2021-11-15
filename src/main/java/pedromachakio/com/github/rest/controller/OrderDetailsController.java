@@ -1,6 +1,5 @@
 package pedromachakio.com.github.rest.controller;
 
-import org.aspectj.weaver.ast.Or;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pedromachakio.com.github.domain.entity.OrderDetails;
