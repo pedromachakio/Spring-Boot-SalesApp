@@ -50,6 +50,7 @@ public class OrderDetailsController {
                 .taxPayerId(order.getClient().getTaxPayerId())
                 .clientName(order.getClient().getName())
                 .totalAmount(order.getTotalPrice())
+                .status(order.getStatus().name())
                 .items(convertOrderedItem(order.getItems()))
                 .build();
     }

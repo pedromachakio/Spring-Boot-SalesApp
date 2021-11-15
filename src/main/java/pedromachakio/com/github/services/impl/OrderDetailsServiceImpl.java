@@ -7,6 +7,7 @@ import pedromachakio.com.github.domain.entity.Client;
 import pedromachakio.com.github.domain.entity.OrderDetails;
 import pedromachakio.com.github.domain.entity.Product;
 import pedromachakio.com.github.domain.entity.ProductOrdered;
+import pedromachakio.com.github.domain.enums.OrderStatus;
 import pedromachakio.com.github.domain.repository.ClientsDAO;
 import pedromachakio.com.github.domain.repository.OrdersDetailsDAO;
 import pedromachakio.com.github.domain.repository.ProductsDAO;
@@ -48,6 +49,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
         orderToPopulate.setTotalPrice(totalPrice);
         orderToPopulate.setOrderDate(LocalDate.now());
         orderToPopulate.setClient(clientWhoOrdered);
+        orderToPopulate.setStatus(OrderStatus.COMPLETE);
 
 
         List<ProductOrdered> listOfOrderedProducts = convertItems(orderToPopulate, orderDetailsDTO.getItems());

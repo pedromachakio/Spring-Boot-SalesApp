@@ -19,5 +19,6 @@ public class OrderInfoDTO {
     private String clientName;
     private BigDecimal totalAmount;
     private String orderDate;
+    private String status;
     private List<OrderedProductInfoDto> items;
 }

@@ -3,6 +3,7 @@ package pedromachakio.com.github.domain.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pedromachakio.com.github.domain.enums.OrderStatus;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -31,6 +32,10 @@ public class OrderDetails {
 
     @Column(name = "TOTAL_PRICE", precision = 20, scale = 2)
     private BigDecimal totalPrice;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private OrderStatus status;
 
     @OneToMany(mappedBy = "orderDetails_ProductOrdered")
     private List<ProductOrdered> items;
