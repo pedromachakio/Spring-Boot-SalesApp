@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Data
@@ -26,6 +28,8 @@ public class Client {
     private String name;
 
     @Column(name = "nif", length = 9)
+    @NotEmpty(message = "Tax Payer ID has to be filled.")
+    @Size(min = 9, max = 9, message = "O NIF tem que ter 9 dígitos.")
     private String taxPayerId;
 
     @JsonIgnore // ignore in json response

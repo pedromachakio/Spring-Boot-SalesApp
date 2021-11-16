@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import pedromachakio.com.github.domain.entity.Product;
 import pedromachakio.com.github.domain.repository.ProductsDAO;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,7 +30,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Product saveProduct(@RequestBody Product product) {
+    public Product saveProduct(@RequestBody @Valid Product product) {
         return productsDAO.save(product);
     }
 
@@ -47,7 +48,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateProduct(@PathVariable Integer id, @RequestBody Product providedProduct) {
+    public void updateProduct(@PathVariable Integer id, @RequestBody @Valid Product providedProduct) {
         productsDAO
                 .findById(id)
                 .map(alreadyExistingProduct -> {

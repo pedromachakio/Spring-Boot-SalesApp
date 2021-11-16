@@ -50,7 +50,7 @@ public class ClientController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateClient(@PathVariable Integer id, @RequestBody Client providedClient) {
+    public void updateClient(@PathVariable Integer id, @RequestBody @Valid Client providedClient) {
 
         clientsDAO
                 .findById(id)
