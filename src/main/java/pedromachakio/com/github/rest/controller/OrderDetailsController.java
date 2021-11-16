@@ -13,6 +13,7 @@ import pedromachakio.com.github.rest.dto.OrderedProductInfoDto;
 import pedromachakio.com.github.rest.dto.StatusUpdateDTO;
 import pedromachakio.com.github.services.OrderDetailsService;
 
+import javax.validation.Valid;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +31,7 @@ public class OrderDetailsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Integer saveOrder(@RequestBody OrderDetailsDTO orderDetailsDTO) {
+    public Integer saveOrder(@RequestBody @Valid OrderDetailsDTO orderDetailsDTO) {
         OrderDetails orderDetails = orderDetailsService.saveOrder(orderDetailsDTO);
         return orderDetails.getId();
     }
@@ -47,7 +48,7 @@ public class OrderDetailsController {
     @PatchMapping("{id}")
     // se fosse o Put tinha que se passar a info TODA do pedido, nao se pode atualizar apenas um campo otherwise dá erro
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateStatus(@PathVariable Integer id, @RequestBody StatusUpdateDTO statusUpdateDTO) {
+    public void updateStatus(@PathVariable Integer id, @RequestBody @Valid StatusUpdateDTO statusUpdateDTO) {
         String newStatus = statusUpdateDTO.getNewStatus();
         orderDetailsService.statusUpdate(id, OrderStatus.valueOf(newStatus));
     }
