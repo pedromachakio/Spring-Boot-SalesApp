@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import pedromachakio.com.github.domain.entity.Client;
 import pedromachakio.com.github.domain.repository.ClientsDAO;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Client saveClient(@RequestBody Client client) {
+    public Client saveClient(@RequestBody @Valid Client client) {
         return clientsDAO.save(client);
     }
 

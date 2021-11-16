@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Data
@@ -21,6 +22,7 @@ public class Client {
     private Integer id;
 
     @Column(name = "NAME", length = 100)
+    @NotEmpty(message = "Name is a must fill field.") // mensagem de erro que mostra caso esteja vazio
     private String name;
 
     @Column(name = "nif", length = 9)
