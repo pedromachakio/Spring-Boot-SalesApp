@@ -13,13 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDetailsDTO {
-    @NotNull(message = "Provide client ID")
+    @NotNull(message = "{campo.codigo-cliente.obrigatorio}")
     private Integer client;
 
-    @NotNull(message = "Price can't be empty")
+    @NotNull(message = "{campo.total-pedido.obrigatorio}")
     private BigDecimal totalPrice;
 
-    @NotEmptyList(message = "Order must have at least one product.")
+    @NotEmptyList(message = "{campo.items-pedido.obrigatorio}")
     private List<ProductsOrderedDTO> items;
 
 

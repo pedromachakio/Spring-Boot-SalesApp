@@ -24,12 +24,12 @@ public class Client {
     private Integer id;
 
     @Column(name = "NAME", length = 100)
-    @NotEmpty(message = "Name is a must fill field.") // mensagem de erro que mostra caso esteja vazio
+    @NotEmpty(message = "{campo.nome.obrigatorio}") // mensagem de erro que mostra caso esteja vazio
     private String name;
 
     @Column(name = "nif", length = 9)
-    @NotEmpty(message = "Tax Payer ID has to be filled.")
-    @Size(min = 9, max = 9, message = "O NIF tem que ter 9 dígitos.")
+    @NotEmpty(message = "{campo.cpf.obrigatorio}")
+    @Size(min = 9, max = 9, message = "{campo.cpf.invalido}")
     private String taxPayerId;
 
     @JsonIgnore // ignore in json response

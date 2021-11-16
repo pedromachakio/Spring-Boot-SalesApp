@@ -22,11 +22,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotEmpty(message = "Description can't be empty")
+    @NotEmpty(message = "{campo.descricao.obrigatorio}")
     private String description;
 
     @Column(name = "UNIT_PRICE")
-    @NotNull(message = "Price can't be none")
+    @NotNull(message = "{campo.preco.obrigatorio}")
     private BigDecimal unitPrice;
 
 
