@@ -13,28 +13,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public PasswordEncoder passwordEncoder() { // para encriptar e desencriptar as passes dos utilizadores
-        return new BCryptPasswordEncoder(); // gera sempre um hash random, logo é mais seguro
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception { // configurar autenticação
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .passwordEncoder(passwordEncoder())
                 .withUser("fulano")
                 .password(passwordEncoder().encode("123"))
                 .roles("USER");
 
-        // criando um utilizador em memória só para testar (não vem de base de dados nem nada)
+
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception { // configurar autorização (depois de ter sido autenticado anteriormente) do GET, POST, etc
-        // por exemplo um cliente autenticado não tem authorization para aceder à info de admins/empregados do banco
+    protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .csrf().disable()
-                .authorizeRequests() // hasRole("USER"); // tem que ter este role para aceder
-                .antMatchers("/api/clients/**").authenticated() // para dizer que para ter acesso a esse endpoint tem que estar autenticado
+                .authorizeRequests()
+                .antMatchers("/api/clients/**").hasRole("USER")
+                .antMatchers("/api/products/**").hasRole("ADMIN") // admins é que registam novos produtos etc
+                .antMatchers("/api/orders").hasRole("USER") // ** representa parâmetro a receber
                 .and() // volta para a raiz
                 .formLogin();
     }
