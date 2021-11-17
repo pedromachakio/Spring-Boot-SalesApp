@@ -25,12 +25,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(passwordEncoder().encode("123"))
                 .roles("USER");
 
-                // criando um utilizador em memória só para testar (não vem de base de dados nem nada)
+        // criando um utilizador em memória só para testar (não vem de base de dados nem nada)
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception { // configurar autorização (depois de ter sido autenticado anteriormente)
+    protected void configure(HttpSecurity http) throws Exception { // configurar autorização (depois de ter sido autenticado anteriormente) do GET, POST, etc
         // por exemplo um cliente autenticado não tem authorization para aceder à info de admins/empregados do banco
-        super.configure(http);
+        http
+                .csrf().disable()
+                .authorizeRequests() // hasRole("USER"); // tem que ter este role para aceder
+                .antMatchers("/api/clients/**").authenticated() // para dizer que para ter acesso a esse endpoint tem que estar autenticado
+                .and() // volta para a raiz
+                .formLogin();
     }
 }
