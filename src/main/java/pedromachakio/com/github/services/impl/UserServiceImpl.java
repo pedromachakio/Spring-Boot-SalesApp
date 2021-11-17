@@ -1,12 +1,14 @@
 package pedromachakio.com.github.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import pedromachakio.com.github.domain.entity.User;
+import pedromachakio.com.github.domain.repository.UserDAO;
 
 @Service
 public class UserServiceImpl implements UserDetailsService {
@@ -14,18 +16,26 @@ public class UserServiceImpl implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserDAO userDAO;
+
+    @Transactional
+    public User saveUser(User user) {
+        return userDAO.save(user);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User foundUser = userDAO.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found in DB"));
 
-        if(!username.equals("broski")) {
-            throw new UsernameNotFoundException("User not found");
-        }
+        String[] roles = foundUser.isAdmin() ? new String[]{"ADMIN", "USER"} : new String[]{"USER"};
 
-        return User
+        return org.springframework.security.core.userdetails.User
                 .builder()
-                .username("broski")
-                .password(passwordEncoder.encode("123"))
-                .roles("USER", "ADMIN")
+                .username(foundUser.getUsername())
+                .password(foundUser.getPassword())
+                .roles(roles)
                 .build();
     }
 }
