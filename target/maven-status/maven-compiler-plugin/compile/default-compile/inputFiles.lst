@@ -1,0 +1,16 @@
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\domain\repository\ProductsOrderedDAO.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\rest\controller\dto\OrderDetailsDTO.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\services\OrderDetailsService.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\domain\entity\ProductOrdered.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\domain\repository\OrdersDetailsDAO.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\rest\controller\ProductController.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\domain\repository\ProductsDAO.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\rest\controller\OrderDetailsController.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\domain\entity\Client.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\rest\controller\dto\ProductsOrderedDTO.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\domain\repository\ClientsDAO.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\rest\controller\ClientController.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\SalesApp.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\domain\entity\OrderDetails.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\services\impl\OrderDetailsServiceImpl.java
+C:\CodingProjects\Spring-Boot-SalesApp\src\main\java\pedromachakio\com\github\domain\entity\Product.java

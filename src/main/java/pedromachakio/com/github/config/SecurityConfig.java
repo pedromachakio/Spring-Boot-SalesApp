@@ -2,6 +2,7 @@ package pedromachakio.com.github.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -37,9 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/clients/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/api/products/**").hasRole("ADMIN") // admins é que registam novos produtos etc
                 .antMatchers("/api/orders/**").hasAnyRole("USER", "ADMIN")// ** representa parâmetro a receber
-                .antMatchers("/api/users/**").hasAnyRole("USER", "ADMIN")// ** representa parâmetro a receber
+                .antMatchers("/api/products/**").hasRole("ADMIN") // admins é que registam novos produtos etc
+                .antMatchers(HttpMethod.POST, "/api/users/**").permitAll() // para qualquer pessoa se poder registar
+                .anyRequest().authenticated() // in case I forget to map a specific request, isto vai cover everything e make sure que estão autenticados
                 .and()
                 .httpBasic(); // em vez de ser login form é passado nos headers
     }
