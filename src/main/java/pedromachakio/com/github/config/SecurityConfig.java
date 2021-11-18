@@ -7,8 +7,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.OncePerRequestFilter;
+import pedromachakio.com.github.security.jwt.JWTService;
+import pedromachakio.com.github.security.jwt.JwtAuthFilter;
 import pedromachakio.com.github.services.impl.UserServiceImpl;
 
 @EnableWebSecurity
@@ -16,6 +21,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private JWTService jwtService;
+
+    @Bean
+    private OncePerRequestFilter jwtAuthFilter() {
+        return new JwtAuthFilter(jwtService, userService);
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -45,7 +58,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .headers().frameOptions().disable()
                 .and()
-                //.formLogin();
-                .httpBasic(); // em vez de ser login form é passado nos headers
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class); // para que o nosso filter execute primeiro e
+        // coloque o user dentro da sessao antes de correr o filtro do spring
     }
 }
