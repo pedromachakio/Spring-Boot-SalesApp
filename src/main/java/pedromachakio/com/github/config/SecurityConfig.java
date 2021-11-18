@@ -38,7 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/clients/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/api/products/**").hasRole("ADMIN") // admins é que registam novos produtos etc
-                .antMatchers("/api/orders").hasAnyRole("USER", "ADMIN")// ** representa parâmetro a receber
+                .antMatchers("/api/orders/**").hasAnyRole("USER", "ADMIN")// ** representa parâmetro a receber
+                .antMatchers("/api/users/**").hasAnyRole("USER", "ADMIN")// ** representa parâmetro a receber
                 .and()
                 .httpBasic(); // em vez de ser login form é passado nos headers
     }
