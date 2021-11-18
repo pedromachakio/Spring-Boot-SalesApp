@@ -1,4 +1,4 @@
-package pedromachakio.com.github;
+package pedromachakio.com.github.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
+import pedromachakio.com.github.SalesApp;
 import pedromachakio.com.github.domain.entity.User;
 
 import java.time.Instant;
