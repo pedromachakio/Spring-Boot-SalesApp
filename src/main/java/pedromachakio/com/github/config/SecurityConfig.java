@@ -43,6 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/users/**").permitAll() // para qualquer pessoa se poder registar
                 .anyRequest().authenticated() // in case I forget to map a specific request, isto vai cover everything e make sure que estão autenticados
                 .and()
+                .headers().frameOptions().disable()
+                .and()
+                //.formLogin();
                 .httpBasic(); // em vez de ser login form é passado nos headers
     }
 }
