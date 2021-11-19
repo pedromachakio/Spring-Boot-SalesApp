@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pedromachakio.com.github.domain.entity.User;
 import pedromachakio.com.github.domain.repository.UserDAO;
+import pedromachakio.com.github.exception.InvalidPasswordException;
 
 @Service
 public class UserServiceImpl implements UserDetailsService {
@@ -22,6 +23,17 @@ public class UserServiceImpl implements UserDetailsService {
     @Transactional
     public User saveUser(User user) {
         return userDAO.save(user);
+    }
+
+    public UserDetails authenticate(User user) {
+        UserDetails userDetails = loadUserByUsername(user.getUsername());
+        boolean doPasswordsMatch = passwordEncoder.matches(user.getPassword(), userDetails.getPassword());
+
+        if (doPasswordsMatch) {
+            return userDetails;
+        } else {
+            throw new InvalidPasswordException();
+        }
     }
 
     @Override
