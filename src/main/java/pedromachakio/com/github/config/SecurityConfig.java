@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JWTService jwtService;
 
     @Bean
-    private OncePerRequestFilter jwtAuthFilter() {
+    public OncePerRequestFilter jwtAuthFilter() {
         return new JwtAuthFilter(jwtService, userService);
     }
 
