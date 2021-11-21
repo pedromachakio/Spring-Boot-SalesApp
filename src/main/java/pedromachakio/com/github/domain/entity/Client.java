@@ -18,7 +18,7 @@ import java.util.Set;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // em mysql tem que ser identity e nao auto
     @Column(name = "ID")
     private Integer id;
 
@@ -26,7 +26,7 @@ public class Client {
     @NotEmpty(message = "{campo.nome.obrigatorio}") // mensagem de erro que mostra caso esteja vazio
     private String name;
 
-    @Column(name = "nif", length = 9)
+    @Column(name = "TAXPAYER_ID", length = 9)
     @NotEmpty(message = "{campo.cpf.obrigatorio}")
     @Size(min = 9, max = 9, message = "{campo.cpf.invalido}")
     private String taxPayerId;
