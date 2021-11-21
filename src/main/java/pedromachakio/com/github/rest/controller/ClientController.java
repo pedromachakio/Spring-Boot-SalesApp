@@ -1,5 +1,6 @@
 package pedromachakio.com.github.rest.controller;
 
+import io.swagger.annotations.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/clients")
+@Api("Api Clientes Nome Customizado")
 public class ClientController {
 
     private ClientsDAO clientsDAO;
@@ -22,7 +24,12 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public Client getClientById(@PathVariable Integer id) {
+    @ApiOperation("Operation get client details for specific client - customized")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Client found bro"),
+            @ApiResponse(code = 404, message = "Client NOT found bro")
+    })
+    public Client getClientById(@PathVariable @ApiParam("ID do broski") Integer id) {
         return clientsDAO
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find client."));
@@ -31,6 +38,11 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Operation guardar novo client - customized")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Client successfully saved bro"),
+            @ApiResponse(code = 404, message = "Client NOT saved bro")
+    })
     public Client saveClient(@RequestBody @Valid Client client) {
         return clientsDAO.save(client);
     }
