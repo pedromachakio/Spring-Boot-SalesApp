@@ -18,5 +18,8 @@ public class SalesApp extends SpringBootServletInitializer {
         // comandos are the same:
         // mvn clean package
 
+
+        // mvn clean package -P nomeDoPerfilQueCriei para alternar entre development e production e ser mais facil mudar de jar para war
+        // sem ter que ir alterar tudo manualmente de todas as vezes
     }
 }
